@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>HTML5 Geolocation API</title>
+ 
+<script type="text/javascript">
+if(navigator.geolocation) {
+navigator.geolocation.getCurrentPosition(function(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+      alert(latitude+' '+longitude);
+});
+ 
+} else {
+    alert("Geolocation API не поддерживается в вашем браузере");
+}
+</script>
+ 
+</head>
+ 
+<body>
+<p>Пример определения местоположения пользователя - HTML5 Geolocation API</p>
+</body>
+</html>
