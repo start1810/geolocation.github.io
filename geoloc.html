@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>HTML5 Geolocation API</title>
+ 
+<script type="text/javascript">
+const id = navigator.geolocation.watchPosition(position => {
+  document.body.innerHTML += `<p>${position.coords.latitude}: ${position.coords.longitude}</p>`;
+  console.log(position);
+})
+</script>
+ 
+</head>
+ 
+<body>
+<p>Пример определения местоположения пользователя - HTML5 Geolocation API</p>
+</body>
+</html>

@@ -9,12 +9,19 @@ if(navigator.geolocation) {
 navigator.geolocation.getCurrentPosition(function(position) {
             var latitude = position.coords.latitude;
             var longitude = position.coords.longitude;
-      alert(latitude+' '+longitude);
+      document.body.innerHTML += `<p>(${latitude} + ${longitude})`;
 });
  
 } else {
     alert("Geolocation API не поддерживается в вашем браузере");
 }
+</script>
+
+<script type="text/javascript">
+const id = navigator.geolocation.watchPosition(position => {
+  document.body.innerHTML += `<p>${position.coords.latitude}: ${position.coords.longitude}</p>`;
+  console.log(position);
+})
 </script>
  
 </head>
