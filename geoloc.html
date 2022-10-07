@@ -20,7 +20,7 @@ const id = navigator.geolocation.watchPosition(position => {
   let distanceBetweenPoints = (oldLat - currentLat) + (oldLong - currentLong);
   const oldDistance = Number(document.body.querySelector('.distance > .distanceinmetres').textContent);
   if (Math.abs(distanceBetweenPoints) < 1) {
-    distanceBetweenPoints *= 1000;
+    distanceBetweenPoints += 100;
   }
   const currentDistance = oldDistance + distanceBetweenPoints;
 
