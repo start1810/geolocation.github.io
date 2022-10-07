@@ -3,36 +3,56 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>HTML5 Geolocation API</title>
- 
-<script type="text/javascript">
-if(navigator.geolocation) {
-navigator.geolocation.getCurrentPosition(function(position) {
-            var latitude = position.coords.latitude;
-            var longitude = position.coords.longitude;
-      document.body.innerHTML += `<p>(${latitude} + ${longitude})`;
-});
- 
-} else {
-    alert("Geolocation API не поддерживается в вашем браузере");
-}
-</script>
 
 <script type="text/javascript">
-let run = 0;
-let old_lat = 0;
-let old_long = 0;
 const id = navigator.geolocation.watchPosition(position => {
-    run = ((old_lat - position.coords.latitude)^2 + (old_long - position.coords.longitude)^2)^(1/2);
-  document.body.innerHTML += `<p>${position.coords.latitude}: ${position.coords.longitude}</p>`;
-  document.body.innerHTML += `<p>${run}`;
-  old_lat = position.coords.latitude;
-  old_long = position.coords.longitude;
+  document.body.querySelector('.oldCoord > .oldLatitude').textContent = document.body.querySelector('.currentCoord > .currentLatitude').textContent;
+  document.body.querySelector('.oldCoord > .oldLongitude').textContent = document.body.querySelector('.currentCoord > .currentLongitude').textContent;
+  document.body.querySelector('.currentCoord > .currentLatitude').textContent =`${position.coords.latitude}`;
+  document.body.querySelector('.currentCoord > .currentLongitude').textContent =`${position.coords.longitude}`;
+  console.log(position);
+
+  const oldLat = Number(document.body.querySelector('.oldCoord > .oldLatitude').textContent);
+  const oldLong = Number(document.body.querySelector('.oldCoord > .oldLongitude').textContent);
+  const currentLat = Number(document.body.querySelector('.currentCoord > .currentLatitude').textContent);
+  const currentLong = Number(document.body.querySelector('.currentCoord > .currentLongitude').textContent);
+
+  let distanceBetweenPoints = (oldLat - currentLat) + (oldLong - currentLong);
+  const oldDistance = Number(document.body.querySelector('.distance > .distanceinmetres').textContent);
+  if (Math.abs(distanceBetweenPoints) < 1) {
+    distanceBetweenPoints *= 1000;
+  }
+  const currentDistance = oldDistance + distanceBetweenPoints;
+
+  document.body.querySelector('.distance > .distanceinmetres').textContent = currentDistance;
+
+  console.log(oldLat);
+  console.log(oldLong);
+  console.log(currentLat);
+  console.log(currentLong);
+  console.log(distanceBetweenPoints);
+
+
 })
 </script>
- 
+
 </head>
  
 <body>
-<p>Пример определения местоположения пользователя - HTML5 Geolocation API</p>
+  <div class="oldCoord">
+    <h2>Старые координаты</h2>
+    <p class="oldLatitude">0</p>
+    <p class="oldLongitude">0</p>
+  </div>
+  <div class="currentCoord">
+    <h2>Текущие координаты</h2>
+    <p class="currentLatitude">0</p>
+    <p class="currentLongitude">0</p>
+  </div>
+  <div class='distance'>
+    <h2>Расстояние</h2>
+    <p class="distanceinmetres">0 </p>
+    <p>метров</p>
+  </div>
 </body>
 </html>
