@@ -39,7 +39,7 @@ const id = navigator.geolocation.watchPosition(position => {
   if (distanceBetweenPoints > 100) {
     document.body.querySelector('.distance > .distanceinmetres').textContent = 0;
   } else {
-    document.body.querySelector('.distance > .distanceinmetres').textContent = (oldDistance + distanceBetweenPoints) * 1000};
+    document.body.querySelector('.distance > .distanceinmetres').textContent = (oldDistance + distanceBetweenPoints) * 1000;
   };
   
 
