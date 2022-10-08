@@ -17,14 +17,32 @@ const id = navigator.geolocation.watchPosition(position => {
   const currentLat = Number(document.body.querySelector('.currentCoord > .currentLatitude').textContent);
   const currentLong = Number(document.body.querySelector('.currentCoord > .currentLongitude').textContent);
 
-  let distanceBetweenPoints = (oldLat - currentLat) + (oldLong - currentLong);
-  const oldDistance = Number(document.body.querySelector('.distance > .distanceinmetres').textContent);
-  if (Math.abs(distanceBetweenPoints) < 1) {
-    distanceBetweenPoints *= 1000;
-  }
-  const currentDistance = oldDistance + distanceBetweenPoints;
+  const degr_to_merid = 111.1; //количество километров в одном градусе на меридиане 
 
-  document.body.querySelector('.distance > .distanceinmetres').textContent = currentDistance;
+  const km_between_lat = Math.abs(oldLat - currentLat) * degr_to_merid; //AB и CD 
+
+  const cos1 = Math.cos(oldLat * 2 * Math.PI / 360); 
+  const cos2 = Math.cos(currentLat * 2 * Math.PI / 360); 
+
+  const AD = Math.abs(currentLong - oldLong) * cos2 * 111.3; 
+  const BC = Math.abs(currentLong - oldLong) * cos1 * 111.3; 
+
+  const AH = Math.abs(BC - AD) / 2; 
+
+  const BH = Math.sqrt((km_between_lat * km_between_lat) - AH * AH); 
+
+  const HD = AD - AH; 
+  const distanceBetweenPoints = Math.sqrt(BH * BH + HD * HD);
+
+  
+  const oldDistance = Number(document.body.querySelector('.distance > .distanceinmetres').textContent);
+  if (distanceBetweenPoints > 100) {
+    document.body.querySelector('.distance > .distanceinmetres').textContent = 0;
+  } else {
+    document.body.querySelector('.distance > .distanceinmetres').textContent = (oldDistance + distanceBetweenPoints) * 1000;
+  };
+  
+
 
   console.log(oldLat);
   console.log(oldLong);
