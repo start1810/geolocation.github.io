@@ -26,10 +26,7 @@ const distanceCounter = (oldLat, oldLong, currentLat, currentLong) => {
 };
 
 const id = navigator.geolocation.watchPosition(position => {
-  document.body.querySelector('.oldCoord > .oldLatitude').textContent = document.body.querySelector('.currentCoord > .currentLatitude').textContent;
-  document.body.querySelector('.oldCoord > .oldLongitude').textContent = document.body.querySelector('.currentCoord > .currentLongitude').textContent;
-  document.body.querySelector('.currentCoord > .currentLatitude').textContent =`${position.coords.latitude}`;
-  document.body.querySelector('.currentCoord > .currentLongitude').textContent =`${position.coords.longitude}`;
+ 
   console.log(position);
 
   const oldLat = Number(document.body.querySelector('.oldCoord > .oldLatitude').textContent);
@@ -40,30 +37,25 @@ const id = navigator.geolocation.watchPosition(position => {
   const distanceBetweenPoints = distanceCounter(oldLat, oldLong, currentLat, currentLong);
 
   
-  const oldDistance = Number(document.body.querySelector('.distance > .distance0m').textContent);
-  if (distanceBetweenPoints > 100) {
-    document.body.querySelector('.distance > .distance0m').textContent = 0;
-  } else {
-    document.body.querySelector('.distance > .distance0m').textContent = oldDistance + distanceBetweenPoints;
-    if (distanceBetweenPoints > 0.005){
-    document.body.querySelector('.distance > .distance5m').textContent = oldDistance + distanceBetweenPoints;
-    } 
-    if (distanceBetweenPoints > 0.01) {
+  const oldDistance = Number(document.body.querySelector('.distance > .distance10m').textContent);
+  if (distanceBetweenPoints > 1) {
+    document.body.querySelector('.distance > .distance10m').textContent = 0;
+    document.body.querySelector('.oldCoord > .oldLatitude').textContent = document.body.querySelector('.currentCoord > .currentLatitude').textContent;
+    document.body.querySelector('.oldCoord > .oldLongitude').textContent = document.body.querySelector('.currentCoord > .currentLongitude').textContent;
+  } else if (distanceBetweenPoints > 0.01) {
       document.body.querySelector('.distance > .distance10m').textContent = oldDistance + distanceBetweenPoints;
+      document.body.querySelector('.oldCoord > .oldLatitude').textContent = document.body.querySelector('.currentCoord > .currentLatitude').textContent;
+      document.body.querySelector('.oldCoord > .oldLongitude').textContent = document.body.querySelector('.currentCoord > .currentLongitude').textContent;
     }
-    if (distanceBetweenPoints > 0.02) {
-      document.body.querySelector('.distance > .distance20m').textContent = oldDistance + distanceBetweenPoints;
-    }
-  };
+  document.body.querySelector('.currentCoord > .currentLatitude').textContent =`${position.coords.latitude}`;
+  document.body.querySelector('.currentCoord > .currentLongitude').textContent =`${position.coords.longitude}`;
   
   console.log(oldLat);
   console.log(oldLong);
   console.log(currentLat);
   console.log(currentLong);
   console.log(distanceBetweenPoints);
-
-
-})
+});
 </script>
 
 </head>
@@ -81,14 +73,8 @@ const id = navigator.geolocation.watchPosition(position => {
   </div>
   <div class='distance'>
     <h2>Расстояние</h2>
-    <p class="distance0m">0 </p>
-    <p>километров(без учета погрешности)</p>
-    <p class="distance5m">0 </p>
-    <p>километров(расстояния меньше 5м не учитываются)</p>
     <p class="distance10m">0 </p>
     <p>километров(расстояния меньше 10м не учитываются)</p>
-    <p class="distance10m">0 </p>
-    <p>километров(расстояния меньше 20м не учитываются)</p>
   </div>
 </body>
 </html>
