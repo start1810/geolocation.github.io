@@ -25,8 +25,7 @@
     return distanceBetweenPoints;
   };
 
-  const id = navigator.geolocation.watchPosition(position => {
-   
+  const success = (position) => {
     console.log(position);
 
     const oldLat = Number(document.body.querySelector('.oldCoord > .oldLatitude').textContent);
@@ -42,7 +41,7 @@
       document.body.querySelector('.distance > .distance10m').textContent = 0;
       document.body.querySelector('.oldCoord > .oldLatitude').textContent = document.body.querySelector('.currentCoord > .currentLatitude').textContent;
       document.body.querySelector('.oldCoord > .oldLongitude').textContent = document.body.querySelector('.currentCoord > .currentLongitude').textContent;
-    } else if (distanceBetweenPoints > 0.01) {
+    } else if (distanceBetweenPoints > 0.0175) {
         document.body.querySelector('.distance > .distance10m').textContent = `${oldDistance + distanceBetweenPoints}`.slice(0, 6);
         document.body.querySelector('.oldCoord > .oldLatitude').textContent = document.body.querySelector('.currentCoord > .currentLatitude').textContent;
         document.body.querySelector('.oldCoord > .oldLongitude').textContent = document.body.querySelector('.currentCoord > .currentLongitude').textContent;
@@ -55,7 +54,17 @@
     console.log(currentLat);
     console.log(currentLong);
     console.log(distanceBetweenPoints);
-  });
+  };
+
+  const error = () => {
+    alert('Sorry, no position available.');
+  }
+
+  const options = {
+    enableHighAccuracy: true,
+  };
+
+  const id = navigator.geolocation.watchPosition(success, error, options);
   </script>
 
 </head>
@@ -74,7 +83,7 @@
   <div class='distance'>
     <h2>Расстояние</h2>
     <p class="distance10m">0 </p>
-    <p>километров(расстояния меньше 10м не учитываются)</p>
+    <p>километров(расстояния меньше 17,5м не учитываются)</p>
   </div>
 </body>
 </html>
