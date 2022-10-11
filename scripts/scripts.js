@@ -21,8 +21,8 @@ const distanceCounter = (oldLat, oldLong, currentLat, currentLong) => {
     const success = (position) => {
       console.log(position);
 
-      const oldLat = Number(document.body.querySelector('.oldCoord > .oldLatitude').textContent);
-      const oldLong = Number(document.body.querySelector('.oldCoord > .oldLongitude').textContent);
+      const oldLat = Number(document.body.querySelector('#oldLatitude').textContent);
+      const oldLong = Number(document.body.querySelector('#oldLongitude').textContent);
       const currentLat = Number(document.body.querySelector('.currentCoord > .currentLatitude').textContent);
       const currentLong = Number(document.body.querySelector('.currentCoord > .currentLongitude').textContent);
       const accuracyInKm = position.coords.accuracy / 1000;
@@ -32,12 +32,12 @@ const distanceCounter = (oldLat, oldLong, currentLat, currentLong) => {
       const oldDistance = Number(document.body.querySelector('.distance > .distance10m').textContent);
       if (distanceBetweenPoints > 10) {
         document.body.querySelector('.distance > .distance10m').textContent = '00.000';
-        document.body.querySelector('.oldCoord > .oldLatitude').textContent = document.body.querySelector('.currentCoord > .currentLatitude').textContent;
-        document.body.querySelector('.oldCoord > .oldLongitude').textContent = document.body.querySelector('.currentCoord > .currentLongitude').textContent;
-      } else if (distanceBetweenPoints > accuracyInKm) {
+        document.body.querySelector('#oldLatitude').textContent = document.body.querySelector('.currentCoord > .currentLatitude').textContent;
+        document.body.querySelector('#oldLongitude').textContent = document.body.querySelector('.currentCoord > .currentLongitude').textContent;
+      } else if (distanceBetweenPoints > accuracyInKm * 0.7) {
           document.body.querySelector('.distance > .distance10m').textContent = `${oldDistance + distanceBetweenPoints}`.slice(0, 6);
-          document.body.querySelector('.oldCoord > .oldLatitude').textContent = document.body.querySelector('.currentCoord > .currentLatitude').textContent;
-          document.body.querySelector('.oldCoord > .oldLongitude').textContent = document.body.querySelector('.currentCoord > .currentLongitude').textContent;
+          document.body.querySelector('#oldLatitude').textContent = document.body.querySelector('.currentCoord > .currentLatitude').textContent;
+          document.body.querySelector('#oldLongitude').textContent = document.body.querySelector('.currentCoord > .currentLongitude').textContent;
         }
       document.body.querySelector('.currentCoord > .currentLatitude').textContent =`${position.coords.latitude}`;
       document.body.querySelector('.currentCoord > .currentLongitude').textContent =`${position.coords.longitude}`;
