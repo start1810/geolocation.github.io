@@ -1,0 +1,49 @@
+@font-face {
+	font-weight: bold;
+	font-family: helvetica;
+	src:  url("../fonts/Helvetica/helvetica_bold.otf");
+}
+
+.distance {
+	text-align: center;
+	font-family: helvetica, sans-serif;
+	font-weight: bold;
+	font-size: xx-large;
+	margin-top: 100px;
+	color:  #444;
+}
+
+.distance10m {
+	font-size: 100px;
+	margin-bottom: 0px;
+	height: 110px;
+}
+
+.distance p {
+	margin-top: 0px;
+
+} 
+
+.otherelements p {
+	font-weight: bold;
+	font-family: helvetica, sans-serif;
+	margin: 0px;
+	color: #444;
+}
+
+table {
+	text-align: center;
+	margin: auto;
+}
+
+td {
+	width: 100px;
+}
+
+.oldCoord {
+	display: none;
+}
+
+.currentCoord {
+	display: none;
+}
