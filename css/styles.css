@@ -4,6 +4,10 @@
 	src:  url("../fonts/Helvetica/helvetica_bold.otf");
 }
 
+body {
+	margin: auto;
+}
+
 .distance {
 	text-align: center;
 	font-family: helvetica, sans-serif;
@@ -30,6 +34,11 @@
 	margin: 0px;
 	color: #444;
 }
+
+.othertext {
+	font-size: 20px;
+}
+
 
 table {
 	text-align: center;
