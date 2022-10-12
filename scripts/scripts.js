@@ -32,6 +32,7 @@ const success = (position) => {
     document.body.querySelector('.distance > .distance10m').textContent = '00.000';
     document.body.querySelector('#oldLatitude').textContent = document.body.querySelector('.currentCoord > .currentLatitude').textContent;
     document.body.querySelector('#oldLongitude').textContent = document.body.querySelector('.currentCoord > .currentLongitude').textContent;
+    document.body.querySelector('#oldTime').textContent = document.body.querySelector('.currentCoord > .currentTime').textContent;
   } else if (distanceBetweenPoints > accuracyInKm * 0.8) {
     document.body.querySelector('.distance > .distance10m').textContent = `${oldDistance + distanceBetweenPoints}`.slice(0, 5);
     document.body.querySelector('#speed').textContent = `${currentSpeed}`.slice(0, 3);
@@ -40,14 +41,16 @@ const success = (position) => {
   }
   document.body.querySelector('.currentCoord > .currentLatitude').textContent =`${position.coords.latitude}`;
   document.body.querySelector('.currentCoord > .currentLongitude').textContent =`${position.coords.longitude}`;
+  document.body.querySelector('.currentCoord > .currentTime').textContent =`${position.timestamp}`;
       
   console.log(oldLat);
   console.log(oldLong);
   console.log(currentLat);
   console.log(currentLong);
   console.log(distanceBetweenPoints);
-  console.log(currentTime)
-  console.log(currentSpeed)
+  console.log(currentTime);
+  console.log(oldTime);
+  console.log(currentSpeed);
   };
 
   const error = () => {
