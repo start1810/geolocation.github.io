@@ -25,7 +25,7 @@ const success = (position) => {
 
   const accuracyInKm = position.coords.accuracy / 1000;
   const distanceBetweenPoints = distanceCounter(oldLat, oldLong, currentLat, currentLong);
-  const currentSpeed = (distanceBetweenPoints * 3600) / (currentTime - oldTime);
+  const currentSpeed = (distanceBetweenPoints * 3600 * 1000) / (currentTime - oldTime);
   const speedMinPerKm = 60 / currentSpeed; 
 
   const oldDistance = Number(document.body.querySelector('.distance > .distance10m').textContent);
