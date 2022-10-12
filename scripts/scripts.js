@@ -26,6 +26,7 @@ const success = (position) => {
   const accuracyInKm = position.coords.accuracy / 1000;
   const distanceBetweenPoints = distanceCounter(oldLat, oldLong, currentLat, currentLong);
   const currentSpeed = (distanceBetweenPoints * 3600) / (currentTime - oldTime);
+  const speedMinPerKm = 60 / currentSpeed; 
 
   const oldDistance = Number(document.body.querySelector('.distance > .distance10m').textContent);
   if (distanceBetweenPoints > 10) {
@@ -38,6 +39,7 @@ const success = (position) => {
     document.body.querySelector('#speed').textContent = `${currentSpeed}`.slice(0, 4);
     document.body.querySelector('#oldLatitude').textContent = document.body.querySelector('.currentCoord > .currentLatitude').textContent;
     document.body.querySelector('#oldLongitude').textContent = document.body.querySelector('.currentCoord > .currentLongitude').textContent;
+    document.body.querySelector('#speedminperkm').textContent = speedMinPerKm;
   }
   document.body.querySelector('.currentCoord > .currentLatitude').textContent =`${position.coords.latitude}`;
   document.body.querySelector('.currentCoord > .currentLongitude').textContent =`${position.coords.longitude}`;
